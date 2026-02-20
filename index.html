@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHR 360° - Installation Automatique</title>
+    <title>CHR 360° - Installation en 2 Minutes</title>
     <style>
         * {
             margin: 0;
@@ -25,14 +25,14 @@
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 600px;
+            max-width: 550px;
             width: 100%;
             padding: 40px;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .header h1 {
@@ -41,9 +41,54 @@
             margin-bottom: 10px;
         }
 
-        .header p {
+        .header .subtitle {
             color: #666;
             font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .header .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-box h3 {
+            color: #333;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            color: #666;
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .info-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
         }
 
         .form-group {
@@ -65,9 +110,9 @@
         input[type="text"],
         input[type="email"] {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 16px;
             border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 1em;
             transition: all 0.3s;
         }
@@ -81,35 +126,59 @@
         .help-text {
             font-size: 0.85em;
             color: #999;
-            margin-top: 5px;
+            margin-top: 6px;
         }
 
         .help-text a {
             color: #667eea;
             text-decoration: none;
+            font-weight: 600;
         }
 
         .help-text a:hover {
             text-decoration: underline;
         }
 
+        .telegram-help {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 8px;
+            border-left: 3px solid #0088cc;
+        }
+
+        .telegram-help p {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .telegram-help .steps {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .telegram-help .steps strong {
+            color: #0088cc;
+        }
+
         button {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s;
             margin-top: 10px;
         }
 
         button:hover:not(:disabled) {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
         }
 
         button:disabled {
@@ -120,7 +189,7 @@
         .loading {
             display: none;
             text-align: center;
-            margin: 20px 0;
+            margin: 25px 0;
         }
 
         .loading.active {
@@ -131,10 +200,10 @@
             border: 4px solid #f3f3f3;
             border-top: 4px solid #667eea;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             animation: spin 1s linear infinite;
-            margin: 0 auto;
+            margin: 0 auto 15px;
         }
 
         @keyframes spin {
@@ -142,11 +211,17 @@
             100% { transform: rotate(360deg); }
         }
 
+        .loading-text {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
         .result {
             display: none;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
+            padding: 22px;
+            border-radius: 10px;
+            margin-top: 25px;
         }
 
         .result.active {
@@ -155,56 +230,32 @@
 
         .result.success {
             background: #d4edda;
-            border: 1px solid #c3e6cb;
+            border: 2px solid #c3e6cb;
             color: #155724;
         }
 
         .result.error {
             background: #f8d7da;
-            border: 1px solid #f5c6cb;
+            border: 2px solid #f5c6cb;
             color: #721c24;
         }
 
         .result h3 {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
         }
 
-        .workflow-list {
-            margin-top: 15px;
+        .result p {
+            line-height: 1.6;
         }
 
-        .workflow-item {
-            background: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 8px;
-        }
-
-        .workflow-item a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .steps {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .steps h3 {
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .steps ol {
-            padding-left: 20px;
-        }
-
-        .steps li {
-            margin-bottom: 10px;
-            color: #666;
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #999;
+            font-size: 0.85em;
         }
     </style>
 </head>
@@ -212,16 +263,18 @@
     <div class="container">
         <div class="header">
             <h1>🚀 CHR 360°</h1>
-            <p>Installation Automatique</p>
+            <p class="subtitle">Installation Automatique</p>
+            <span class="highlight">✨ Installation en 2 minutes ✨</span>
         </div>
 
-        <div class="steps">
-            <h3>📋 Avant de commencer</h3>
-            <ol>
-                <li>Créez une copie du <a href="https://docs.google.com/spreadsheets/d/1dGB3VMYaxHLFs2vopzruD0JboP92ZrqbnvVsQm47VS0/copy" target="_blank">template Google Sheets</a></li>
-                <li>Créez 4 dossiers dans Google Drive (ACHATS, VENTES, ARCHIVE_ACHATS, ARCHIVE_VENTES)</li>
-                <li>Créez un bot Telegram avec <a href="https://t.me/BotFather" target="_blank">@BotFather</a> et récupérez votre Chat ID</li>
-            </ol>
+        <div class="info-box">
+            <h3>📦 Ce qui sera créé automatiquement :</h3>
+            <ul>
+                <li>Votre Google Sheet personnalisé</li>
+                <li>4 dossiers Drive (ACHATS, VENTES, ARCHIVES)</li>
+                <li>2 workflows n8n actifs</li>
+                <li>Alertes Email + Telegram</li>
+            </ul>
         </div>
 
         <form id="installForm">
@@ -229,90 +282,84 @@
                 <label>
                     Nom du restaurant <span class="required">*</span>
                 </label>
-                <input type="text" name="clientName" required placeholder="Ex: Restaurant Le Gourmet">
+                <input 
+                    type="text" 
+                    name="clientName" 
+                    required 
+                    placeholder="Ex: Restaurant Le Gourmet"
+                    autocomplete="organization"
+                >
             </div>
 
             <div class="form-group">
                 <label>
-                    ID Google Sheet <span class="required">*</span>
+                    Votre email <span class="required">*</span>
                 </label>
-                <input type="text" name="sheetId" required placeholder="Ex: 1dGB3VMYaxHLFs2vopzruD0JboP92Zrq...">
+                <input 
+                    type="email" 
+                    name="email" 
+                    required 
+                    placeholder="Ex: contact@restaurant.com"
+                    autocomplete="email"
+                >
                 <div class="help-text">
-                    Trouvez l'ID dans l'URL: docs.google.com/spreadsheets/d/<strong>[ICI]</strong>/edit
+                    Vous recevrez les alertes et le lien vers vos fichiers
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label>
-                    ID Dossier Drive ACHATS <span class="required">*</span>
-                </label>
-                <input type="text" name="driveAchatsId" required placeholder="Ex: 1puel1sqq0bzYVeVFxBuTF0cEJlRGjGhN">
-                <div class="help-text">
-                    Dossier où seront déposées les factures fournisseurs
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>
-                    ID Dossier Drive VENTES <span class="required">*</span>
-                </label>
-                <input type="text" name="driveVentesId" required placeholder="Ex: 17n_3vaMDDVidXHVxBRYATfK1B6W2Co3L">
-                <div class="help-text">
-                    Dossier où seront déposés les tickets Z
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>
-                    ID Dossier Archive ACHATS <span class="required">*</span>
-                </label>
-                <input type="text" name="driveArchiveAchatsId" required placeholder="Ex: 17WqiUF6XpBszB7JKsMGEkaEYpID9CyAF">
-            </div>
-
-            <div class="form-group">
-                <label>
-                    ID Dossier Archive VENTES <span class="required">*</span>
-                </label>
-                <input type="text" name="driveArchiveVentesId" required placeholder="Ex: 1GyojP4thq7K8ZCVvheoY8y1qgpOtheDo">
-            </div>
-
-            <div class="form-group">
-                <label>
-                    Email pour les alertes <span class="required">*</span>
-                </label>
-                <input type="email" name="email" required placeholder="Ex: contact@restaurant.com">
             </div>
 
             <div class="form-group">
                 <label>
                     Telegram Chat ID <span class="required">*</span>
                 </label>
-                <input type="text" name="telegramChatId" required placeholder="Ex: 123456789">
-                <div class="help-text">
-                    <a href="https://t.me/userinfobot" target="_blank">Obtenir mon Chat ID</a>
+                <input 
+                    type="text" 
+                    name="telegramChatId" 
+                    required 
+                    placeholder="Ex: 123456789"
+                    pattern="-?\d+"
+                    title="Uniquement des chiffres"
+                >
+                <div class="telegram-help">
+                    <p><strong>🤖 Comment obtenir votre Chat ID ? (2 minutes)</strong></p>
+                    <div class="steps">
+                        <strong>1.</strong> Ouvrir Telegram → Chercher <a href="https://t.me/userinfobot" target="_blank">@userinfobot</a><br>
+                        <strong>2.</strong> Envoyer /start au bot<br>
+                        <strong>3.</strong> Copier le numéro "Id" et le coller ci-dessus
+                    </div>
+                    <p style="margin-top: 8px;">
+                        <a href="guide-telegram.html" target="_blank">📖 Guide détaillé avec captures d'écran</a>
+                    </p>
                 </div>
             </div>
 
             <button type="submit" id="submitBtn">
-                🚀 Lancer l'installation
+                🚀 Lancer l'installation (2 min)
             </button>
         </form>
 
         <div class="loading" id="loading">
             <div class="spinner"></div>
-            <p style="margin-top: 15px; color: #667eea; font-weight: 600;">
-                Installation en cours... Cela peut prendre 1-2 minutes.
+            <p class="loading-text">
+                ⚙️ Installation en cours...<br>
+                <span style="font-size: 0.9em; font-weight: normal; color: #999;">
+                    Création de votre infrastructure Google
+                </span>
             </p>
         </div>
 
-        <div class="result" id="result">
-            <!-- Résultat sera inséré ici -->
+        <div class="result" id="result"></div>
+
+        <div class="footer">
+            <p>
+                🔒 100% sécurisé • 💰 100% gratuit (Email + Telegram)<br>
+                Support: arnaudguedou@gmail.com
+            </p>
         </div>
     </div>
 
     <script>
-        // Configuration - À REMPLACER par votre URL Apps Script
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw0nJSh3hqtYpMhplQCWALS4DOqPC4wm1cIkplukfmy0y8N16Sq-wGprnlNzz7TSxPJ/exec';
+        // ⚠️ CONFIGURATION - REMPLACER PAR VOTRE URL APPS SCRIPT
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/VOTRE_DEPLOYMENT_ID/exec';
 
         const form = document.getElementById('installForm');
         const submitBtn = document.getElementById('submitBtn');
@@ -322,11 +369,9 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Récupérer les données du formulaire
+            // Récupérer les données
             const formData = new FormData(form);
-            const data = {
-                action: 'install'
-            };
+            const data = { action: 'install' };
             
             formData.forEach((value, key) => {
                 data[key] = value.trim();
@@ -336,67 +381,80 @@
             submitBtn.disabled = true;
             loading.classList.add('active');
             result.classList.remove('active');
+            form.style.opacity = '0.5';
 
             try {
-                // Appel API
+                // Appel API (no-cors car Apps Script)
                 const response = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Important pour Apps Script
+                    mode: 'no-cors',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(data)
                 });
 
-                // Note: avec no-cors, on ne peut pas lire la réponse
-                // On simule un succès après 2 secondes
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                // Simuler attente (no-cors = pas de réponse lisible)
+                await new Promise(resolve => setTimeout(resolve, 3000));
 
-                // Afficher succès
-                showSuccess(data.clientName);
+                showSuccess(data.clientName, data.email);
 
             } catch (error) {
                 console.error('Erreur:', error);
-                showError(error.message);
+                showError('Une erreur est survenue. Veuillez réessayer.');
             } finally {
                 submitBtn.disabled = false;
                 loading.classList.remove('active');
+                form.style.opacity = '1';
             }
         });
 
-        function showSuccess(clientName) {
+        function showSuccess(clientName, email) {
             result.className = 'result active success';
             result.innerHTML = `
                 <h3>✅ Installation réussie !</h3>
-                <p>Le système CHR 360° a été installé pour <strong>${clientName}</strong>.</p>
-                <p style="margin-top: 15px;">
-                    Vous allez recevoir un email de confirmation avec les liens vers vos workflows n8n.
+                <p style="margin-top: 12px;">
+                    Le système CHR 360° a été installé pour <strong>${clientName}</strong>.
                 </p>
-                <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
-                    💡 Pensez à vérifier vos spams si vous ne recevez pas l'email.
+                <p style="margin-top: 12px;">
+                    📧 Vous allez recevoir un email à <strong>${email}</strong> avec :
+                </p>
+                <ul style="margin: 12px 0; padding-left: 20px;">
+                    <li>Le lien vers votre Google Sheet</li>
+                    <li>Le lien vers vos dossiers Drive</li>
+                    <li>Les liens vers vos workflows n8n</li>
+                    <li>Le guide d'utilisation complet</li>
+                </ul>
+                <p style="margin-top: 12px; font-size: 0.9em; color: #666;">
+                    💡 Pensez à vérifier vos spams si vous ne recevez pas l'email dans 2 minutes.
                 </p>
             `;
+            
+            // Scroll vers le résultat
+            result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
         function showError(message) {
             result.className = 'result active error';
             result.innerHTML = `
                 <h3>❌ Erreur d'installation</h3>
-                <p>${message}</p>
-                <p style="margin-top: 15px;">
-                    Veuillez vérifier vos informations et réessayer.
-                    Si le problème persiste, contactez le support.
+                <p style="margin-top: 12px;">${message}</p>
+                <p style="margin-top: 12px;">
+                    Veuillez vérifier vos informations et réessayer.<br>
+                    Si le problème persiste, contactez : arnaudguedou@gmail.com
                 </p>
             `;
+            
+            result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
-        // Health check au chargement
+        // Health check au chargement (optionnel)
         window.addEventListener('load', async () => {
             try {
-                const response = await fetch(APPS_SCRIPT_URL + '?action=health');
-                console.log('Health check OK');
+                await fetch(APPS_SCRIPT_URL + '?action=health');
+                console.log('✓ API connectée');
             } catch (error) {
-                console.warn('Health check failed:', error);
+                console.warn('⚠ Health check failed');
             }
         });
     </script>
